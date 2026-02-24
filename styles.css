@@ -1,0 +1,249 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.caller-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    max-width: 360px;
+    width: 90%;
+}
+
+.caller-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+
+.caller-name {
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    color: #333;
+}
+
+.buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.accept {
+    background-color: #28a745;
+    box-shadow: 0 4px 10px rgba(40,167,69,0.4);
+}
+
+.hangup {
+    background-color: #dc3545;
+    box-shadow: 0 4px 10px rgba(220,53,69,0.4);
+}
+
+.status {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .caller-card {
+        padding: 1.5rem;
+    }
+
+    .caller-name {
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* additional features */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+.shape1 {
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    top: 10%;
+    left: 5%;
+}
+
+.shape2 {
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    bottom: 10%;
+    right: 5%;
+}
+
+.caller-card {
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.caller-card.ringing .caller-image {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.caller-image {
+    position: relative;
+    display: inline-block;
+}
+
+.ring-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(0,123,255,0.5);
+    animation: ring 1.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes ring {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+}
+
+.timer {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    color: #555;
+}
+
+.caller-title {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.badge {
+    background: gold;
+    color: #333;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.message {
+    background-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0,123,255,0.4);
+}
+
+/* confetti animation */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: confetti-fall 2s forwards ease-out;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(200px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* dark theme */
+body.dark {
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
+    color: #eee;
+}
+body.dark .caller-card {
+    background: rgba(30,30,30,0.85);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+body.dark .caller-name,
+body.dark .status,
+body.dark .timer {
+    color: #eee;
+}
+body.dark button.accept { background-color: #5cb85c; }
+body.dark button.hangup { background-color: #d9534f; }
+body.dark button.message { background-color: #428bca; }

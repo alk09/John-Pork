@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Pork Calling</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button id="themeToggle" class="theme-toggle" title="Toggle theme">🌙</button>
+        </header>
+
+        <div class="background-shapes">
+            <span class="shape shape1"></span>
+            <span class="shape shape2"></span>
+        </div>
+
+        <div class="caller-card ringing">
+            <div class="caller-image">
+                <img src="John_Pork.webp" alt="Caller photo">
+                <span class="ring-effect"></span>
+            </div>
+            <h1 class="caller-name">John Pork <span class="badge">VIP</span></h1>
+            <p class="caller-title">CEO, Pork Incorporated</p>
+            <p id="timer" class="timer">00:00</p>
+            <div class="buttons">
+                <button id="messageBtn" class="message">Message</button>
+                <button id="acceptBtn" class="accept">Accept</button>
+                <button id="hangupBtn" class="hangup">Hang Up</button>
+            </div>
+            <p id="status" class="status">Incoming call...</p>
+        </div>
+    </div>
+    <audio id="ringtone" src="https://actions.google.com/sounds/v1/household/phone_ringing.ogg" loop></audio>
+    <script src="script.js"></script>
+</body>
+</html>
