@@ -1,88 +1,26 @@
-const ringtone = document.getElementById('ringtone');
-const status = document.getElementById('status');
-const timerElem = document.getElementById('timer');
-let timerInterval;
-let seconds = 0;
+﻿const scene = document.querySelector('.scene');
 
-function formatTime(sec) {
-    const m = Math.floor(sec / 60).toString().padStart(2, '0');
-    const s = (sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    const size = Math.random() * 5 + 4;
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+    sparkle.style.left = `${Math.random() * 90 + 5}%`;
+    sparkle.style.top = `${Math.random() * 70 + 10}%`;
+    sparkle.style.background = `hsla(${Math.random() * 50 + 280}, 100%, 85%, 1)`;
+    sparkle.style.boxShadow = `0 0 14px rgba(255, 255, 255, 0.9), 0 0 28px rgba(255, 183, 93, 0.35)`;
+    scene.appendChild(sparkle);
+    sparkle.addEventListener('animationend', () => sparkle.remove());
 }
 
-function startRingtone() {
-    if (ringtone) {
-        ringtone.currentTime = 0;
-        ringtone.play().catch(() => {});
+function burstSparkles() {
+    for (let i = 0; i < 16; i += 1) {
+        setTimeout(createSparkle, i * 120);
     }
 }
 
-function stopRingtone() {
-    if (ringtone) {
-        ringtone.pause();
-        ringtone.currentTime = 0;
-    }
-}
-
-function startTimer() {
-    clearInterval(timerInterval);
-    seconds = 0;
-    timerElem.textContent = '00:00';
-    timerInterval = setInterval(() => {
-        seconds++;
-        timerElem.textContent = formatTime(seconds);
-    }, 1000);
-}
-
-function createConfetti() {
-    const card = document.querySelector('.caller-card');
-    if (!card) return;
-    for (let i = 0; i < 30; i++) {
-        const conf = document.createElement('div');
-        conf.classList.add('confetti');
-        conf.style.background = `hsl(${Math.random() * 360},70%,60%)`;
-        conf.style.left = Math.random() * 100 + '%';
-        conf.style.top = Math.random() * 100 + '%';
-        card.appendChild(conf);
-        setTimeout(() => conf.remove(), 2200);
-    }
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-}
-
-// page load
 window.addEventListener('DOMContentLoaded', () => {
-    startRingtone();
-    startTimer(); // timer increases from start
-});
-
-document.getElementById('acceptBtn').addEventListener('click', () => {
-    status.textContent = 'Get Wrecked Nerd';
-    status.style.color = '#6328a7af';
-    document.querySelector('.caller-card').classList.remove('ringing');
-    stopRingtone();
-    startTimer();
-    createConfetti();
-});
-
-document.getElementById('hangupBtn').addEventListener('click', () => {
-    status.textContent = 'Call ended.';
-    status.style.color = '#dc3545';
-    document.querySelector('.caller-card').classList.remove('ringing');
-    stopRingtone();
-    stopTimer();
-    // redirect to Rickroll
-    window.location.href = 'https://www.youtube.com/watch?v=oHg5SJYRHA0';
-});
-
-document.getElementById('messageBtn').addEventListener('click', () => {
-    alert('YOU FOR REAL THOUGHT YOU CAN MESSAGE JOHN PORK HIMSELF WHO DO YOU THINK YOU ARE? what a loser');
-});
-
-document.getElementById('themeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    const btn = document.getElementById('themeToggle');
-    btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    burstSparkles();
+    setInterval(burstSparkles, 2600);
 });
